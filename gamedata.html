@@ -4,6 +4,21 @@
 <!-- HEADER -->
 <head>
 
+<style>
+   #game-container{
+   position:absolute;
+   bottom: 0;
+   top: 0;
+   left: 0;
+   right: 0;
+   }
+   #game{
+   position: relative;
+   top: 50%;
+   transform: translate(0, -50%);
+   }
+</style>
+
 <title>what it feels like in here</title>
 
 <script type="bitsyGameData" id="exportedGameData">
@@ -5435,9 +5450,9 @@ function onready(startWithTitle) {
 	document.addEventListener('keydown', onkeydown);
 	document.addEventListener('keyup', onkeyup);
 
-	canvas.addEventListener('touchstart', ontouchstart);
-	canvas.addEventListener('touchmove', ontouchmove);
-	canvas.addEventListener('touchend', ontouchend);
+	document.getElementById('game-container').addEventListener('touchstart', ontouchstart);
+	document.getElementById('game-container').addEventListener('touchmove', ontouchmove);
+	document.getElementById('game-container').addEventListener('touchend', ontouchend);
 
 	update_interval = setInterval(update,-1);
 
@@ -5682,9 +5697,9 @@ function stopGame() {
 	document.removeEventListener('keydown', onkeydown);
 	document.removeEventListener('keyup', onkeyup);
 
-	canvas.removeEventListener('touchstart', ontouchstart);
-	canvas.removeEventListener('touchmove', ontouchmove);
-	canvas.removeEventListener('touchend', ontouchend);
+	document.getElementById('game-container').removeEventListener('touchstart', ontouchstart);
+	document.getElementById('game-container').removeEventListener('touchmove', ontouchmove);
+	document.getElementById('game-container').removeEventListener('touchend', ontouchend);
 
 	clearInterval(update_interval);
 }
@@ -7387,9 +7402,11 @@ var scriptUtils = scriptModule.CreateUtils(); // TODO: move to editor.js?
 
 <!-- DOCUMENT BODY -->
 <body onload='startExportedGame()'>
+	<div id="game-container">
 	<!-- GAME CANVAS -->
 	<canvas id='game'></canvas>
 	<audio src="soundtrack.mp3" autoplay loop display="none">
+	</div>
 </body>
 
 
